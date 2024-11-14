@@ -15,6 +15,10 @@ We invest a lot of resources into creating [best in class open source packages](
 
 We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
+## Prerequisites
+
+You must have a filament panel installed to use this package. you can specify the panel to use this package with the install command
+
 ## Installation
 
 You can install the package via composer:
@@ -23,31 +27,32 @@ You can install the package via composer:
 composer require bchubb-web/laravel-seo-manager
 ```
 
-You can publish and run the migrations with:
+then publish the required files
 
 ```bash
-php artisan vendor:publish --tag="laravel-seo-manager-migrations"
+php artisan seo:install
+```
+This will publish a config file, migration and generate a filament resource for the seo manager
+
+
+You can then run the migration to create the required tables
+```bash
 php artisan migrate
 ```
 
-You can publish the config file with:
+## The toolbar
 
-```bash
-php artisan vendor:publish --tag="laravel-seo-manager-config"
+To add the toolbar to your site add the following tag at the beginning of your body tag.
+```blade
+@livewire('seo-manager:toolbar')
 ```
+Currently you will have to handle conditional rendering of the toolbar when the user is not logged in yourself.
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
+Optionally, you can publish the toolbar view and customise yourself
 ```bash
 php artisan vendor:publish --tag="laravel-seo-manager-views"
 ```
+
 
 ## Usage
 
@@ -55,24 +60,6 @@ php artisan vendor:publish --tag="laravel-seo-manager-views"
 $seoManager = new Bchubbweb\SeoManager();
 echo $seoManager->echoPhrase('Hello, Bchubbweb!');
 ```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
