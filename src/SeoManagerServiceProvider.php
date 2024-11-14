@@ -8,6 +8,10 @@ use Bchubbweb\SeoManager\Commands\SeoManagerCommand;
 
 class SeoManagerServiceProvider extends PackageServiceProvider
 {
+    public function bootingPackage()
+    {
+        \Livewire\Livewire::component('seo-manager:toolbar', Livewire\Toolbar::class);
+    }
     public function configurePackage(Package $package): void
     {
         /*
@@ -17,9 +21,9 @@ class SeoManagerServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-seo-manager')
-            ->hasConfigFile()
+            ->hasConfigFile('seo-manager')
             ->hasViews('seo-manager')
-            ->hasMigration('create_laravel_seo_manager_table')
+            ->hasMigration('create_seo_pages_table')
             ->hasCommand(SeoManagerCommand::class);
     }
 }

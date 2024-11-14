@@ -14,11 +14,18 @@ class SeoManagerCommand extends Command
     {
         // publish this package
         $this->call('vendor:publish', [
-            '--tag' => 'laravel-seo-manager-migrations',
+            '--tag' => 'seo-manager-migrations',
         ]);
 
         $this->call('vendor:publish', [
-            '--tag' => 'laravel-seo-manager-config',
+            '--tag' => 'seo-manager-config',
+        ]);
+
+        $this->info('Creating Admin Resource');
+
+        $this->call('make:filament-resource', [
+            'name' => 'SeoPage',
+            '--model-namespace' => 'Bchubbweb\SeoManager\Models',
         ]);
 
         $this->comment('All done');
